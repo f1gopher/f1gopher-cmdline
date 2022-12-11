@@ -13,9 +13,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package main
+package menu
 
 import (
+	"f1gopher/f1gopher-cmdline/ui"
 	"fmt"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
@@ -45,27 +46,21 @@ type mainMenu struct {
 	message     string
 	servers     string
 	nextSession string
+	version     string
 }
 
-func NewMainMenu(hasDebugFile bool, servers []string) *mainMenu {
+func newMainMenu(servers []string, version string) *mainMenu {
 
 	menu := []string{
 		"Live",
 		"Replay",
 		"Quit"}
 
-	if hasDebugFile {
-		menu = []string{
-			"Live",
-			"Replay",
-			"Debug Replay",
-			"Quit"}
-	}
-
 	return &mainMenu{
 		cursor:  0,
 		choices: menu,
 		servers: strings.Join(servers, ","),
+		version: version,
 	}
 }
 
@@ -82,36 +77,32 @@ func (m *mainMenu) Enter() {
 		nextSession.EventTime.In(time.Local).Format("15:04 02 Jan 2006 MST"))
 }
 
-func (m *mainMenu) Update(msg tea.Msg) (newUI uiPage, cmds []tea.Cmd) {
-	newUI = MainMenu
+func (m *mainMenu) Update(msg tea.Msg) (newUI ui.Page, cmds []tea.Cmd) {
+	newUI = ui.MainMenu
 
-	switch msg := msg.(type) {
+	switch msgType := msg.(type) {
 	case tea.KeyMsg:
-		switch msg.String() {
+		switch msgType.String() {
 		case "up":
 			if m.cursor > 0 {
 				m.cursor--
 			}
+
 		case "down":
 			if m.cursor < len(m.choices)-1 {
 				m.cursor++
 			}
+
 		case "enter", " ":
 			switch m.choices[m.cursor] {
 			case "Live":
-				newUI = Live
+				newUI = ui.Live
 
 			case "Replay":
-				newUI = ReplayMenu
-
-			case "Debug Replay":
-				newUI = DebugReplay
+				newUI = ui.ReplayMenu
 
 			case "Quit":
-				newUI = Quit
-
-			default:
-				panic("")
+				newUI = ui.Quit
 			}
 		}
 	}
@@ -124,7 +115,7 @@ func (m *mainMenu) View() string {
 	s := lipgloss.NewStyle().
 		Underline(true).
 		Foreground(lipgloss.Color("#AF0202")).
-		Render("F1Gopher") + "\n\n"
+		Render("F1Gopher-Cmdline") + "\n\n"
 
 	s += lipgloss.NewStyle().Render("Next Session: ")
 
@@ -158,8 +149,9 @@ func (m *mainMenu) View() string {
 		)
 	}
 
-	serverInfo := lipgloss.NewStyle().Width(m.currentWidth).Align(lipgloss.Right).Render(fmt.Sprintf("Server(s): %s", m.servers))
-	version := lipgloss.NewStyle().Width(m.currentWidth).Align(lipgloss.Right).Render("v0.5")
+	serverInfo := lipgloss.NewStyle().Width(m.currentWidth).Align(lipgloss.Right).Render(
+		fmt.Sprintf("Server(s): %s", m.servers))
+	version := lipgloss.NewStyle().Width(m.currentWidth).Align(lipgloss.Right).Render("v" + m.version)
 
 	return fmt.Sprintf("%s\n%s\n%s", menu, serverInfo, version)
 }

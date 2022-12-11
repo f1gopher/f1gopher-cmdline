@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package main
+package sessionUI
 
 import (
 	"fmt"
@@ -128,11 +128,11 @@ func trackStatusColor(state Messages.FlagState) string {
 	case Messages.RedFlag:
 		return "#FF0000"
 	case Messages.ChequeredFlag:
-		return "FFFFFF"
+		return "#FFFFFF"
 	case Messages.NoFlag:
 		return ""
 	default:
-		panic("")
+		panic("Unhandled track status color: " + state.String())
 	}
 }
 
@@ -145,7 +145,7 @@ func sessionStatusColor(state Messages.SessionState) string {
 	case Messages.Aborted:
 		return "#FF0000"
 	default:
-		panic("")
+		panic("Unhandled session status color: " + state.String())
 	}
 }
 
@@ -172,6 +172,6 @@ func locationColor(location Messages.CarLocation) string {
 	case Messages.Stopped, Messages.OutOfRace:
 		return "#FF0000"
 	default:
-		panic("Unhandled")
+		panic("Unhandled location color: " + location.String())
 	}
 }

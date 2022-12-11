@@ -16,6 +16,7 @@
 package main
 
 import (
+	"f1gopher/f1gopher-cmdline/menu"
 	"flag"
 	"fmt"
 	tea "github.com/charmbracelet/bubbletea"
@@ -28,7 +29,6 @@ import (
 
 func main() {
 	cachePtr := flag.String("cache", "", "Path to the folder to cache data in")
-	debugPtr := flag.String("debug", "", "Debug replay file")
 	logPtr := flag.String("log", "", "Log file")
 	addressPtr := flag.String("address", "", "Web server address")
 	portPtr := flag.String("port", "8000", "Web server port")
@@ -54,9 +54,9 @@ func main() {
 		servers = []string{fmt.Sprintf("%s:%s", *addressPtr, *portPtr)}
 	}
 
-	model := NewUI(*cachePtr, *debugPtr, servers, time.Duration(*delayPtr)*time.Second, *livePtr)
+	model := menu.NewUI(*cachePtr, servers, time.Duration(*delayPtr)*time.Second, *livePtr, version)
 	p := tea.NewProgram(model, tea.WithAltScreen(), tea.WithoutCatchPanics())
-	p.Start()
+	p.Run()
 }
 
 func getLocalIP() []string {

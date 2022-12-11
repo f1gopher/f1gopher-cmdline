@@ -13,9 +13,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-package main
+package menu
 
 import (
+	"f1gopher/f1gopher-cmdline/ui"
 	"fmt"
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
@@ -71,8 +72,8 @@ func (d itemDelegate) Render(w io.Writer, m list.Model, index int, listItem list
 	fmt.Fprint(w, fn(str))
 }
 
-func NewReplayMenu() *replayMenu {
-	items := []list.Item{}
+func newReplayMenu() *replayMenu {
+	var items []list.Item
 
 	for _, event := range f1gopherlib.RaceHistory() {
 		items = append(items, item{event: event})
@@ -99,22 +100,22 @@ func (m *replayMenu) Resize(msg tea.WindowSizeMsg) {
 	m.list.SetHeight(msg.Height - 1)
 }
 
-func (m *replayMenu) Update(msg tea.Msg) (newUI uiPage, cmds []tea.Cmd) {
-	newUI = ReplayMenu
+func (m *replayMenu) Update(msg tea.Msg) (newUI ui.Page, cmds []tea.Cmd) {
+	newUI = ui.ReplayMenu
 
-	switch msg := msg.(type) {
+	switch msgType := msg.(type) {
 	case tea.KeyMsg:
-		switch msg.Type {
+		switch msgType.Type {
 		case tea.KeyEnter, tea.KeySpace:
 			selected, ok := m.list.SelectedItem().(item)
 			if ok {
 				m.choice = selected
 			}
 
-			return Replay, nil
+			return ui.Replay, nil
 
 		case tea.KeyEsc:
-			return MainMenu, nil
+			return ui.MainMenu, nil
 		}
 	}
 
