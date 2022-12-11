@@ -130,7 +130,9 @@ func (m *raceUI) uiDisplay(segmentCount int, remaining string, v []Messages.Timi
 		}
 
 		gapColor := lipgloss.Color("#FFFFFF")
+		m.driverGapLock.Lock()
 		trend, exists := m.driverGapTrend[driver.Number]
+		m.driverGapLock.Unlock()
 		if exists {
 			if trend.trend > 0 {
 				if trend.trend > 10 {
@@ -262,7 +264,9 @@ func (m *raceUI) htmlDisplay(segmentCount int, remaining string, v []Messages.Ti
 		}
 
 		gapColor := lipgloss.Color("#FFFFFF")
+		m.driverGapLock.Lock()
 		trend, exists := m.driverGapTrend[driver.Number]
+		m.driverGapLock.Unlock()
 		if exists {
 			if trend.trend > 0 {
 				if trend.trend > 10 {

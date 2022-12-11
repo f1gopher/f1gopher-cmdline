@@ -60,6 +60,28 @@ func fmtDuration(d time.Duration) string {
 	return fmt.Sprintf("%02d:%02d.%03d", minutes, seconds, milliseconds)
 }
 
+func fmtCountdown(d time.Duration) string {
+	milliseconds := d.Milliseconds()
+
+	if milliseconds == 0 {
+		return ""
+	}
+
+	minutes := milliseconds / (1000 * 60)
+	milliseconds -= minutes * 60 * 1000
+	seconds := milliseconds / 1000
+	milliseconds -= seconds * 1000
+
+	if minutes < 0 {
+		minutes = -minutes
+	}
+	if seconds < 0 {
+		seconds = -seconds
+	}
+
+	return fmt.Sprintf("%02d:%02d", minutes, seconds)
+}
+
 func timeColor(personalFastest bool, overallFastest bool) string {
 
 	if overallFastest {

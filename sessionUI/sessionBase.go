@@ -82,6 +82,7 @@ type sessionBase struct {
 	fastestSpeedTrap      int
 
 	driverGapTrend map[int]driverTrend
+	driverGapLock  sync.Mutex
 
 	servers          []string
 	html             string
@@ -201,6 +202,7 @@ func (s *sessionBase) listen() {
 
 			// For races calculate the gap to the car in  front trend
 			if s.f.Session() == Messages.RaceSession || s.f.Session() == Messages.SprintSession {
+				s.driverGapLock.Lock()
 				for x := range s.data {
 					gap := s.data[x].TimeDiffToPositionAhead.Milliseconds()
 
@@ -234,6 +236,7 @@ func (s *sessionBase) listen() {
 						s.driverGapTrend[s.data[x].Number] = driverData
 					}
 				}
+				s.driverGapLock.Unlock()
 			}
 
 		case msg := <-s.f.Event():
@@ -544,9 +547,9 @@ func (s *sessionBase) View() string {
 
 	// If it is a race and the session hasn't started yet (remaining time count down hasn't started) then
 	// display a count down to the start of the session
-	if s.f.Session() == Messages.RaceSession || s.f.Session() == Messages.SprintSession && s.remainingTime == 0 {
-		status += lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF00")).Render(
-			fmt.Sprintf(", Session Starts in: %s", fmtDuration(s.f.SessionStart().Sub(s.eventTime))))
+	if (s.f.Session() == Messages.RaceSession || s.f.Session() == Messages.SprintSession) && s.event.Status == Messages.UnknownState {
+		status += ", " + lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF00")).Render(
+			fmt.Sprintf("Session Starts in: %s", fmtCountdown(s.f.SessionStart().Sub(s.eventTime))))
 	}
 
 	if s.f.IsPaused() {
@@ -570,7 +573,7 @@ func (s *sessionBase) updateHTML(v []Messages.Timing) {
 		segmentCount = len("Segment")
 	}
 
-	table, separator := s.renderDataForScreen(segmentCount, remaining, v)
+	table, separator := s.renderDataForHtml(segmentCount, remaining, v)
 
 	table += separator + "\n"
 	trackStatus := "Track Status: |"
@@ -655,9 +658,8 @@ func (s *sessionBase) updateHTML(v []Messages.Timing) {
 
 	// If it is a race and the session hasn't started yet (remaining time count down hasn't started) then
 	// display a count down to the start of the session
-	if s.f.Session() == Messages.RaceSession || s.f.Session() == Messages.SprintSession && s.remainingTime == 0 {
-		status += lipgloss.NewStyle().Foreground(lipgloss.Color("#00FF00")).Render(
-			fmt.Sprintf(", <font color=\"#00FF00\">Session Starts in: %s</font>", fmtDuration(s.f.SessionStart().Sub(s.eventTime))))
+	if (s.f.Session() == Messages.RaceSession || s.f.Session() == Messages.SprintSession) && s.event.Status == Messages.UnknownState {
+		status += fmt.Sprintf(", <font color=\"#00FF00\">Session Starts in: %s</font>", fmtCountdown(s.f.SessionStart().Sub(s.eventTime)))
 	}
 
 	table += status
