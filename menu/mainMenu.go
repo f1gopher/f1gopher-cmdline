@@ -70,7 +70,7 @@ func (m *mainMenu) Resize(msg tea.WindowSizeMsg) {
 }
 
 func (m *mainMenu) Enter() {
-	nextSession, _ := f1gopherlib.NextSession()
+	nextSession, _, _, _ := f1gopherlib.HappeningSessions()
 	m.nextSession = fmt.Sprintf("%s %s at %s",
 		nextSession.Name,
 		strings.Replace(nextSession.Type.String(), "_", " ", -1),

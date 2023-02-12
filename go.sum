@@ -18,6 +18,8 @@ github.com/containerd/console v1.0.3 h1:lIr7SlA5PxZyMV30bDW0MGbiOPXwc63yRuCP0ARu
 github.com/containerd/console v1.0.3/go.mod h1:7LqA/THxQ86k76b8c/EMSiaJ3h1eZkMkXar0TQ1gf3U=
 github.com/f1gopher/f1gopherlib v0.9.0 h1:gOdjUbQFJkUEzzDkDe1gR2Kf5uMzUJrHDEVDGY667Z0=
 github.com/f1gopher/f1gopherlib v0.9.0/go.mod h1:TVPPbzyyaNFnf6eAblIKzbaVG7c0EY9U6ARR73xD0m4=
+github.com/f1gopher/f1gopherlib v0.9.1-0.20230212100839-b4cf25addd3c h1:XB5X9QOnoRW8j6JETnQLmSazuVPoG23XTV2AWT03Dak=
+github.com/f1gopher/f1gopherlib v0.9.1-0.20230212100839-b4cf25addd3c/go.mod h1:U1D/cLtBgWE33Z0eJd3QPw6dOsjw8RAW8z9tKYCv2c4=
 github.com/f1gopher/signalr/v2 v2.0.0-20221210121059-1985aaf5fb97 h1:ake47TNb+vBn+r4dlB23hh6J/Hi0AZraq28ZaQrKBoQ=
 github.com/f1gopher/signalr/v2 v2.0.0-20221210121059-1985aaf5fb97/go.mod h1:I+Wlu0JSNF8jkGxWKW6X6B1hlLM/fMcJq23drxf3MkE=
 github.com/gorilla/mux v1.8.0 h1:i40aqfkR1h2SlN9hojwV5ZA91wcXFOvkdNIeFDP5koI=

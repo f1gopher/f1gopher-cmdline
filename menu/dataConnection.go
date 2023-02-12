@@ -17,11 +17,12 @@ package menu
 
 import (
 	"github.com/f1gopher/f1gopherlib"
+	"github.com/f1gopher/f1gopherlib/flowControl"
 	"github.com/f1gopher/f1gopherlib/parser"
 )
 
 func newLiveConnection(cache string) f1gopherlib.F1GopherLib {
-	_, data := f1gopherlib.CreateLive(
+	data, _ := f1gopherlib.CreateLive(
 		parser.EventTime|parser.Timing|parser.Event|parser.RaceControl|parser.TeamRadio|parser.Weather,
 		"",
 		cache)
@@ -33,7 +34,8 @@ func newReplayConnection(cache string, event f1gopherlib.RaceEvent) f1gopherlib.
 	data, _ := f1gopherlib.CreateReplay(
 		parser.EventTime|parser.Timing|parser.Event|parser.RaceControl|parser.TeamRadio|parser.Weather,
 		event,
-		cache)
+		cache,
+		flowControl.Realtime)
 
 	return data
 }

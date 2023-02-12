@@ -83,7 +83,7 @@ func (m *raceUI) uiDisplay(segmentCount int, remaining string, v []Messages.Timi
 		if driver.Location == Messages.Stopped {
 			row := fmt.Sprintf("%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s",
 				lipgloss.NewStyle().Align(lipgloss.Center).Width(5).Padding(0, 1, 0, 1).Render(fmt.Sprintf("%d", driver.Position)),
-				lipgloss.NewStyle().Align(lipgloss.Center).Width(8).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(driver.Color)).Render(driver.ShortName),
+				lipgloss.NewStyle().Align(lipgloss.Center).Width(8).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(driver.HexColor)).Render(driver.ShortName),
 				lipgloss.NewStyle().Align(lipgloss.Left).Width(segmentCount+2).Render(""),
 				lipgloss.NewStyle().Align(lipgloss.Center).Width(timeWidth).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(fastestLapColor(driver.OverallFastestLap))).Render(fmtDuration(driver.FastestLap)),
 				lipgloss.NewStyle().Align(lipgloss.Center).Width(timeWidth).Padding(0, 1, 0, 1).Render(""),
@@ -153,7 +153,7 @@ func (m *raceUI) uiDisplay(segmentCount int, remaining string, v []Messages.Timi
 
 		row := fmt.Sprintf("%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s",
 			lipgloss.NewStyle().Align(lipgloss.Center).Width(5).Padding(0, 1, 0, 1).Render(fmt.Sprintf("%d", driver.Position)),
-			lipgloss.NewStyle().Align(lipgloss.Center).Width(8).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(driver.Color)).Render(driver.ShortName),
+			lipgloss.NewStyle().Align(lipgloss.Center).Width(8).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(driver.HexColor)).Render(driver.ShortName),
 			lipgloss.NewStyle().Align(lipgloss.Left).Width(m.event.Sector1Segments+m.event.Sector2Segments+m.event.Sector3Segments+2).Render(segments),
 			lipgloss.NewStyle().Align(lipgloss.Center).Width(timeWidth).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(fastestLapColor(driver.OverallFastestLap))).Render(fmtDuration(driver.FastestLap)),
 			lipgloss.NewStyle().Align(lipgloss.Center).Width(timeWidth).Padding(0, 1, 0, 1).Foreground(gapColor).Render(fmtDuration(gap)),

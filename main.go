@@ -28,7 +28,7 @@ import (
 )
 
 func main() {
-	cachePtr := flag.String("cache", "", "Path to the folder to cache data in")
+	cachePtr := flag.String("cache", "./.cache", "Path to the folder to cache data in")
 	logPtr := flag.String("log", "", "Log file")
 	addressPtr := flag.String("address", "", "Web server address")
 	portPtr := flag.String("port", "8000", "Web server port")

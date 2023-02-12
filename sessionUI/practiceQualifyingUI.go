@@ -109,7 +109,7 @@ func (m *practiceQualifyingUI) uiDisplay(segmentCount int, remaining string, v [
 
 				row = fmt.Sprintf("%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s",
 					lipgloss.NewStyle().Align(lipgloss.Center).Width(5).Padding(0, 1, 0, 1).Background(dropZoneBackground).Render(fmt.Sprintf("%d", driver.Position)),
-					lipgloss.NewStyle().Align(lipgloss.Center).Width(8).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(driver.Color)).Render(driver.ShortName),
+					lipgloss.NewStyle().Align(lipgloss.Center).Width(8).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(driver.HexColor)).Render(driver.ShortName),
 					lipgloss.NewStyle().Align(lipgloss.Left).Width(segmentCount+2).Render(segments),
 					lipgloss.NewStyle().Align(lipgloss.Center).Width(timeWidth).Padding(0, 1, 0, 1).Background(dropZoneBackground).Render(fmtDuration(driver.FastestLap)),
 					lipgloss.NewStyle().Align(lipgloss.Center).Width(timeWidth).Padding(0, 1, 0, 1).Background(dropZoneBackground).Render(fmtDuration(gap)),
@@ -124,7 +124,7 @@ func (m *practiceQualifyingUI) uiDisplay(segmentCount int, remaining string, v [
 			} else {
 				row = fmt.Sprintf("%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s",
 					lipgloss.NewStyle().Align(lipgloss.Center).Width(5).Padding(0, 1, 0, 1).Render(fmt.Sprintf("%d", driver.Position)),
-					lipgloss.NewStyle().Align(lipgloss.Center).Width(8).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(driver.Color)).Render(driver.ShortName),
+					lipgloss.NewStyle().Align(lipgloss.Center).Width(8).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(driver.HexColor)).Render(driver.ShortName),
 					lipgloss.NewStyle().Align(lipgloss.Left).Width(segmentCount+2).Render(segments),
 					lipgloss.NewStyle().Align(lipgloss.Center).Width(timeWidth).Padding(0, 1, 0, 1).Render(fmtDuration(driver.FastestLap)),
 					lipgloss.NewStyle().Align(lipgloss.Center).Width(timeWidth).Padding(0, 1, 0, 1).Render(fmtDuration(gap)),
@@ -146,7 +146,7 @@ func (m *practiceQualifyingUI) uiDisplay(segmentCount int, remaining string, v [
 
 			row = fmt.Sprintf("%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s",
 				lipgloss.NewStyle().Align(lipgloss.Center).Width(5).Padding(0, 1, 0, 1).Background(outBackground).Render(fmt.Sprintf("%d", driver.Position)),
-				lipgloss.NewStyle().Align(lipgloss.Center).Width(8).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(driver.Color)).Render(driver.ShortName),
+				lipgloss.NewStyle().Align(lipgloss.Center).Width(8).Padding(0, 1, 0, 1).Foreground(lipgloss.Color(driver.HexColor)).Render(driver.ShortName),
 				lipgloss.NewStyle().Align(lipgloss.Left).Width(segmentCount+2).Background(outBackground).Render(""),
 				lipgloss.NewStyle().Align(lipgloss.Center).Width(timeWidth).Padding(0, 1, 0, 1).Background(outBackground).Render(fmtDuration(driver.FastestLap)),
 				lipgloss.NewStyle().Align(lipgloss.Center).Width(timeWidth).Padding(0, 1, 0, 1).Background(outBackground).Render(""),
