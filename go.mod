@@ -6,7 +6,7 @@ require (
 	github.com/charmbracelet/bubbles v0.14.0
 	github.com/charmbracelet/bubbletea v0.23.1
 	github.com/charmbracelet/lipgloss v0.6.0
-	github.com/f1gopher/f1gopherlib v0.9.1-0.20230223131358-752be3e0db6b
+	github.com/f1gopher/f1gopherlib v0.9.1-0.20230223134714-4f8546ffdff0
 	github.com/gorilla/mux v1.8.0
 	github.com/hajimehoshi/go-mp3 v0.3.4
 	github.com/hajimehoshi/oto/v2 v2.3.1
