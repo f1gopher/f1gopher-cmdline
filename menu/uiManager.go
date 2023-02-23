@@ -170,7 +170,7 @@ func (m UIManager) createSessionUI(data f1gopherlib.F1GopherLib, isLive bool) se
 	var result sessionUI.SessionUI
 
 	switch data.Session() {
-	case Messages.Practice1Session, Messages.Practice2Session, Messages.Practice3Session, Messages.QualifyingSession:
+	case Messages.Practice1Session, Messages.Practice2Session, Messages.Practice3Session, Messages.QualifyingSession, Messages.PreSeasonSession:
 		result = sessionUI.NewPracticeQualifyingUI(m.servers, m.liveDelay)
 
 	case Messages.SprintSession, Messages.RaceSession:
