@@ -58,7 +58,7 @@ It allows you to view timing data and more from Formula 1 events, either live or
 ### Screenshots
 
 #### Main Menu
-![](./imgs/main menu.png)
+![](./imgs/main_menu.png)
 
 #### Replay Menu
-![](./imgs/replay menu.png)
+![](./imgs/replay_menu.png)
