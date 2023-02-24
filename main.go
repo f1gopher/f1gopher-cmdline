@@ -27,6 +27,9 @@ import (
 	"time"
 )
 
+var Version string
+var BuildTime string
+
 func main() {
 	cachePtr := flag.String("cache", "./.cache", "Path to the folder to cache data in")
 	logPtr := flag.String("log", "", "Log file")
@@ -54,7 +57,7 @@ func main() {
 		servers = []string{fmt.Sprintf("%s:%s", *addressPtr, *portPtr)}
 	}
 
-	model := menu.NewUI(*cachePtr, servers, time.Duration(*delayPtr)*time.Second, *livePtr, version)
+	model := menu.NewUI(*cachePtr, servers, time.Duration(*delayPtr)*time.Second, *livePtr, Version)
 	p := tea.NewProgram(model, tea.WithAltScreen(), tea.WithoutCatchPanics())
 	p.Run()
 }

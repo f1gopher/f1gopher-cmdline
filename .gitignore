@@ -16,3 +16,6 @@
 ./.cache
 go.work
 .cache
+default.pgo
+f1gopher-cmdline
+f1gopher-cmdline*.zip
