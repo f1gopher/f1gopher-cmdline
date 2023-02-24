@@ -22,6 +22,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/f1gopher/f1gopherlib"
+	"github.com/f1gopher/f1gopherlib/Messages"
 	"io"
 )
 
@@ -76,6 +77,10 @@ func newReplayMenu() *replayMenu {
 	var items []list.Item
 
 	for _, event := range f1gopherlib.RaceHistory() {
+		if event.Type == Messages.PreSeasonSession {
+			continue
+		}
+
 		items = append(items, item{event: event})
 	}
 
